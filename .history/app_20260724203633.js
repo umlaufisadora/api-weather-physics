@@ -7,7 +7,7 @@ let count = 0;
         {
             count +=1;
             const list = document.createElement('li');
-            const lista = document.getElementById('listinha')
+            const
 
 
             list.classList.add('task');
@@ -15,7 +15,7 @@ let count = 0;
             const content = `<input placeholder="Digite o nome da cidade..." id="input-list"></input>`;
 
             list.innerHTML = content;
-            lista.appendChild(list)
+            describe.appendChild(list)
         }
          console.log(count)
     });

@@ -7,7 +7,7 @@ let count = 0;
         {
             count +=1;
             const list = document.createElement('li');
-            const lista = document.getElementById('listinha')
+            const lista = document.getElementById('l')
 
 
             list.classList.add('task');
