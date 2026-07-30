@@ -22,6 +22,8 @@
 
 //API KEY: 9bfc94f07adf1576638ea4934a72a9f3
 
+//API KEY PEXELS: fSmD7EBWyWrNcPRWCfHdRvALS1tVGWu6tHMEscDwxjfEiesW99u9igwA
+
 const apiKey = "9bfc94f07adf1576638ea4934a72a9f3"; 
 const apiCountryUrl = "https://flagsapi.com/:country_code/:style/:size.png";
 
@@ -52,17 +54,30 @@ const getWeatherData = async(city) =>
 
 const showWeatherData = async (city) => 
 {
+    let errorMessage = document.getElementById('erro');
     const data = await getWeatherData(city);
 
-    cityElement.innerText = data.name;
-    tempElement.innerText = parseInt(data.main.temp);
-    descElement.innerText = data.weather[0].description;
-    weatherIconElement.setAttribute("src", `https://openweathermap.org/payload/api/media/file/${data.weather[0].icon}.png`)
-    countryElement.setAttribute("src", `https://flagsapi.com/${data.sys.country}/flat/32.png`)
-    humidityElement.innerText = `${data.main.humidity}%`
-    windElement.innerText = `${data.wind.speed}km/h`
+    try
+    {
 
-    weatherContainer.classList.remove("hide");
+        errorMessage.classList.add("errorHide");
+    
+        cityElement.innerText = data.name;
+        tempElement.innerText = parseInt(data.main.temp);
+        descElement.innerText = data.weather[0].description;
+        weatherIconElement.setAttribute("src", `https://openweathermap.org/payload/api/media/file/${data.weather[0].icon}.png`)
+        countryElement.setAttribute("src", `https://flagsapi.com/${data.sys.country}/flat/32.png`)
+        humidityElement.innerText = `${data.main.humidity}%`
+        windElement.innerText = `${data.wind.speed}km/h`
+
+        weatherContainer.classList.remove("hide");
+        showBackgroundCountry(data);
+    }
+    catch(erro)
+    {
+        errorMessage.classList.remove("errorHide");
+        errorMessage.innerHTML = `<p>ERRO: Cidade não encontrada</p>`
+    }
 }
 
 //Events
@@ -84,3 +99,35 @@ cityInput.addEventListener("keyup", (event) =>
         showWeatherData(city);
     }
 });
+
+const apiKeyPhoto = "fSmD7EBWyWrNcPRWCfHdRvALS1tVGWu6tHMEscDwxjfEiesW99u9igwA";
+
+const showBackgroundCountry = async (data) =>
+{
+    const backgroundBody = document.body
+
+    const url = `https://api.pexels.com/v1/search?query=${data.name}&per_page=1`;
+
+    try
+    {
+        const response = await fetch(url, {
+            headers: 
+            {
+                Authorization: apiKeyPhoto
+            }
+        });
+
+        const photos = await response.json();
+
+        if(photos.photos.length > 0)
+        {
+            const imageUrl = photos.photos[0].src.landscape;
+
+            document.body.style.backgroundImage = `url("${imageUrl}")`;
+        }
+    }
+    catch(erro)
+    {
+        console.error("Erro ao buscar imagem:" , erro)
+    }
+ }

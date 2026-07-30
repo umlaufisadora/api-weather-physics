@@ -1,4 +1,18 @@
 /*============================
+CORES
+============================*/
+
+:root
+{
+    --icy-blue: #AEDEF5;
+    --azure-blue: #367ADF;
+    --fresh-sky: #4FACE5;
+    --french-blue: #394988;
+    --charcoal-blue: #353A4C;
+
+}
+
+/*============================
 GERAL
 ============================*/
 
@@ -11,7 +25,7 @@ GERAL
 
 body
 {
-    background: linear-gradient(180deg, #594cee 0%, #8dd0f5 100%);
+    background: linear-gradient(180deg, var(--icy-blue) 0%, var(--french-blue) 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +39,7 @@ body
 
 .container
 {
-    background-color: #5c54ed;
+    background-color: var(--charcoal-blue);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 2rem;
     color: #fdfdfd;
@@ -59,13 +73,27 @@ FORM
     padding: 0.8rem;
     min-height: 50px;
     margin-left: 8px;
-    background-color: #8dd0f5;
+    background-color: var(--icy-blue);
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
+.form #erro
+{
+    margin-top: 15px;
+    background-color: var(--fresh-sky);
+    padding: 13px;
+    border-radius: 0.5rem;
+    border: 2px solid var(--french-blue);
+    text-align: center;
+}
+
+.form .errorHide
+{
+    display: none;
+}
 /*============================
 CLIMA
 ============================*/
