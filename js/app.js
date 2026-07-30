@@ -75,6 +75,7 @@ const showWeatherData = async (city) =>
     }
     catch(erro)
     {
+        weatherContainer.classList.add("hide");
         errorMessage.classList.remove("errorHide");
         errorMessage.innerHTML = `<p>ERRO: Cidade não encontrada</p>`
     }
@@ -106,7 +107,7 @@ const showBackgroundCountry = async (data) =>
 {
     const backgroundBody = document.body
 
-    const url = `https://api.pexels.com/v1/search?query=${data.name}&per_page=1`;
+    const url = `https://api.pexels.com/v1/search?query=${data.name}&per_page=3&locale=pt-BR`;
 
     try
     {
@@ -121,9 +122,10 @@ const showBackgroundCountry = async (data) =>
 
         if(photos.photos.length > 0)
         {
-            const imageUrl = photos.photos[0].src.landscape;
+            const imageUrl = photos.photos[2].src.landscape;
 
-            document.body.style.backgroundImage = `url("${imageUrl}")`;
+            document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)),url("${imageUrl}")`;
+            document.body.style.backgroundSize = 'cover';
         }
     }
     catch(erro)
