@@ -30,6 +30,8 @@ body
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
+    position: relative;
 }
 
 .hide
@@ -149,4 +151,24 @@ CLIMA
 #details-container #humidity
 {
     border-right: 1px solid #fff;
+}
+
+.info
+{
+    background-color: var(--charcoal-blue);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+    color: #fdfdfd;
+    border-radius: 1rem;
+
+    width: 20rem;
+
+
+    position: absolute;
+    margin-right: 1000px;
+}
+
+.hidden
+{
+    display: none;
 }

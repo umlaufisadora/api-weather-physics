@@ -1,25 +1,3 @@
-// const describe = document.getElementById('btn-describe');
-// let count = 0;
-
-//     describe.addEventListener('click', () =>
-//     {
-//         if(count <1)
-//         {
-//             count +=1;
-//             const list = document.createElement('li');
-//             const lista = document.getElementById('listButton')
-
-
-//             list.classList.add('task');
-
-//             const content = `<input placeholder="Digite o nome da cidade..." id="input-list"></input>`;
-
-//             list.innerHTML = content;
-//             lista.appendChild(list)
-//         }
-//          console.log(count)
-//     });
-
 //API KEY: 9bfc94f07adf1576638ea4934a72a9f3
 
 //API KEY PEXELS: fSmD7EBWyWrNcPRWCfHdRvALS1tVGWu6tHMEscDwxjfEiesW99u9igwA
@@ -56,11 +34,13 @@ const showWeatherData = async (city) =>
 {
     let errorMessage = document.getElementById('erro');
     const data = await getWeatherData(city);
+    const info = document.querySelector(".info")
 
     try
     {
 
         errorMessage.classList.add("errorHide");
+        info.classList.add("hidden")
     
         cityElement.innerText = data.name;
         tempElement.innerText = parseInt(data.main.temp);
@@ -71,7 +51,15 @@ const showWeatherData = async (city) =>
         windElement.innerText = `${data.wind.speed}km/h`
 
         weatherContainer.classList.remove("hide");
-        showBackgroundCountry(data);
+
+        if(data.name === "Jaraguá do Sul")
+        {
+            showJaraguaDoSulSpecial(data)
+        }
+        else
+        {
+            showBackgroundCountry(data);
+        }
     }
     catch(erro)
     {
@@ -133,3 +121,24 @@ const showBackgroundCountry = async (data) =>
         console.error("Erro ao buscar imagem:" , erro)
     }
  }
+
+ const showJaraguaDoSulSpecial = async(data) =>
+ {
+    const backgroundBody = document.body
+    const info = document.querySelector(".info")
+
+    try
+    {
+        const image = new Image();
+        info.classList.remove("hidden")
+
+        document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)),url("../image/jaragua-do-sul.jpg")`;
+        document.body.style.backgroundSize = 'cover';
+    }
+    catch(erro)
+    {
+        console.error("Erro ao buscar imagem:" , erro)
+    }
+ }
+
+ 
