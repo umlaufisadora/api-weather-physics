@@ -45,6 +45,12 @@ const getWeatherData = async(city : string) : Promise<WeatherData> =>
     const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`
 
     const res = await fetch(apiWeatherURL);
+    
+    if(!res.ok)
+    {
+        throw new Error("Cidade não encontrada")
+    }
+
     const data = await res.json();
 
     return data;

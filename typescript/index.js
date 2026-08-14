@@ -1,6 +1,5 @@
 "use strict";
 //API KEY: 9bfc94f07adf1576638ea4934a72a9f3
-Object.defineProperty(exports, "__esModule", { value: true });
 //API KEY PEXELS: fSmD7EBWyWrNcPRWCfHdRvALS1tVGWu6tHMEscDwxjfEiesW99u9igwA
 const apiKey = "9bfc94f07adf1576638ea4934a72a9f3";
 const apiCountryUrl = "https://flagsapi.com/:country_code/:style/:size.png";
@@ -18,6 +17,9 @@ const weatherContainer = document.querySelector("#weather-data");
 const getWeatherData = async (city) => {
     const apiWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=pt_br`;
     const res = await fetch(apiWeatherURL);
+    if (!res.ok) {
+        throw new Error("Cidade não encontrada");
+    }
     const data = await res.json();
     return data;
 };
